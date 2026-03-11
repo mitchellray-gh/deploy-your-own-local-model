@@ -1,8 +1,12 @@
-import { groq } from '@ai-sdk/groq';
+import { createGroq } from '@ai-sdk/groq';
 import { convertToModelMessages, streamText, UIMessage } from 'ai';
 
 // Allow streaming responses up to 60 seconds
 export const maxDuration = 60;
+
+const groq = createGroq({
+  apiKey: process.env.GROQ_API_KEY,
+});
 
 export async function POST(req: Request) {
   const { messages, webSearch }: { messages: UIMessage[]; webSearch: boolean } =
