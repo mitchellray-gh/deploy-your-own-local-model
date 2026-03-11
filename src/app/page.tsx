@@ -5,7 +5,7 @@ import { DefaultChatTransport } from 'ai';
 import { useState } from 'react';
 
 export default function Home() {
-  const [webSearch, setWebSearch] = useState(true);
+  const [webSearch, setWebSearch] = useState(false);
   const { messages, sendMessage, status, stop, error } = useChat({
     transport: new DefaultChatTransport({
       api: '/api/chat',
