@@ -9,7 +9,18 @@ export default function Home() {
   const { messages, sendMessage, status, stop, error } = useChat({
     transport: new DefaultChatTransport({
       api: '/api/chat',
-      body: { webSearch },
+      body: {
+        webSearch,
+        userDateTime: new Date().toLocaleString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          timeZoneName: 'short',
+        }),
+      },
     }),
   });
   const [input, setInput] = useState('');
