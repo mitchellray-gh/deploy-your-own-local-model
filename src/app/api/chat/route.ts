@@ -1,4 +1,4 @@
-import { createGroq, type GroqLanguageModelOptions } from '@ai-sdk/groq';
+import { createGroq } from '@ai-sdk/groq';
 import { convertToModelMessages, streamText, UIMessage } from 'ai';
 
 export const maxDuration = 30;
@@ -35,12 +35,6 @@ export async function POST(req: Request) {
     messages: await convertToModelMessages(recentMessages),
     // Tighter token budget for search — avoids long waits
     maxOutputTokens: webSearch ? 512 : 1024,
-    providerOptions: {
-      groq: {
-        // flex tier = higher throughput on Groq
-        serviceTier: 'flex',
-      } satisfies GroqLanguageModelOptions,
-    },
     ...(webSearch && {
       tools: {
         browser_search: groq.tools.browserSearch({}),
